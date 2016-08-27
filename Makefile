@@ -20,3 +20,6 @@ build:
 
 release:
 	@docker build --tag $(REPOSITORY):$(shell cat VERSION) --rm .
+
+push:
+	@docker push $(REPOSITORY):$(shell cat VERSION)
