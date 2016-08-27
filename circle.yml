@@ -4,9 +4,7 @@ machine:
 dependencies:
   override:
     - docker info
-    - if [[ -e ~/docker-ubuntu/image.tar ]]; then docker load --input ~/docker-ubuntu/image.tar; fi
     - docker build --tag stefaniuk/ubuntu .
-    - mkdir -p ~/docker-ubuntu; docker save --output ~/docker-ubuntu/image.tar stefaniuk/ubuntu
 test:
   override:
     - docker run -it stefaniuk/ubuntu echo "Hello World!"
