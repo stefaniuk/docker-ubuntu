@@ -1,5 +1,4 @@
-[![CircleCI](https://circleci.com/gh/stefaniuk/docker-ubuntu.svg?style=shield "CircleCI")](https://circleci.com/gh/stefaniuk/docker-ubuntu) 
-[![Quay](https://quay.io/repository/stefaniuk/ubuntu/status "Quay")](https://quay.io/repository/stefaniuk/ubuntu)
+[![CircleCI](https://circleci.com/gh/stefaniuk/docker-ubuntu.svg?style=shield "CircleCI")](https://circleci.com/gh/stefaniuk/docker-ubuntu) [![Quay](https://quay.io/repository/stefaniuk/ubuntu/status "Quay")](https://quay.io/repository/stefaniuk/ubuntu)
 
 Docker Ubuntu
 =============
