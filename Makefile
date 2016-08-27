@@ -12,14 +12,14 @@ help:
 	@echo
 	@echo "Usage:"
 	@echo
-	@echo "    make build|release"
+	@echo "    make build|release|push"
 	@echo
 
 build:
 	@docker build --tag $(REPOSITORY) --rm .
 
-release:
+release: build
 	@docker build --tag $(REPOSITORY):$(shell cat VERSION) --rm .
 
-push:
+push: release
 	@docker push $(REPOSITORY):$(shell cat VERSION)
