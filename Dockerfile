@@ -1,15 +1,29 @@
 FROM ubuntu:trusty-20160819
 MAINTAINER daniel.stefaniuk@gmail.com
 
-RUN echo "APT::Install-Recommends 0;\nAPT::Install-Suggests 0;" >> /etc/apt/apt.conf.d/01norecommends \
+ENV GOSU_VERSION="1.9"
+
+RUN set -ex \
+    \
+    echo "APT::Install-Recommends 0;\nAPT::Install-Suggests 0;" >> /etc/apt/apt.conf.d/01norecommends \
     && apt-get --yes update \
     && apt-get --yes install \
         ca-certificates \
         curl \
         net-tools \
         netcat \
-        sudo \
         unzip \
         vim.tiny \
         wget \
-    && rm -rf /tmp/* /var/tmp/* /var/lib/apt/lists/*
+    && rm -rf /tmp/* /var/tmp/* /var/lib/apt/lists/* \
+    \
+    # SEE: https://github.com/tianon/gosu
+    && arch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" \
+    && wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$arch" \
+    && wget -O /usr/local/bin/gosu.asc "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$arch.asc" \
+    && export GNUPGHOME="$(mktemp -d)" \
+    && gpg --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4 \
+    && gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu \
+    && rm -r "$GNUPGHOME" /usr/local/bin/gosu.asc \
+    && chmod +x /usr/local/bin/gosu \
+    && gosu nobody true
