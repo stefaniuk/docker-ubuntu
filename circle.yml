@@ -2,9 +2,13 @@ machine:
   services:
     - docker
 dependencies:
+  cache_directories:
+    - "~/docker"
   override:
     - docker info
+    - if [[ -e ~/docker/image.tar ]]; then docker load --input ~/docker/image.tar; fi
     - docker build --tag stefaniuk/ubuntu .
+    - mkdir -p ~/docker; docker save stefaniuk/ubuntu > ~/docker/image.tar
 test:
   override:
     - docker run -it stefaniuk/ubuntu echo "Hello World!"
