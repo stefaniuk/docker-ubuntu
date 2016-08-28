@@ -1,4 +1,4 @@
-FROM ubuntu:trusty-20160819
+FROM ubuntu:16.04
 MAINTAINER daniel.stefaniuk@gmail.com
 
 ENV GOSU_VERSION="1.9"
