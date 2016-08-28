@@ -12,7 +12,7 @@ help:
 	@echo
 	@echo "Usage:"
 	@echo
-	@echo "    make build|release|push"
+	@echo "    make build|release|push|test|purge"
 	@echo
 
 build:
@@ -23,3 +23,13 @@ release: build
 
 push: release
 	@docker push $(REPOSITORY):$(shell cat VERSION)
+
+test:
+	@docker run --interactive --tty --rm \
+		--name $(CONTAINER) \
+		--hostname $(CONTAINER) \
+		$(REPOSITORY) \
+		echo "Hello World!"
+
+purge:
+	@docker rmi $(REPOSITORY) > /dev/null 2>&1 ||:
