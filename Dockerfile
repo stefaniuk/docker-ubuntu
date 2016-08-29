@@ -31,8 +31,8 @@ RUN set -ex \
     && chmod +x /usr/local/bin/gosu \
     && gosu nobody true \
     \
-    && groupadd --system $SYSTEM_USER \
-    && useradd --system --gid $SYSTEM_USER $SYSTEM_USER
+    && groupadd --system --gid 1000 $SYSTEM_USER \
+    && useradd --system --uid 1000 --gid 1000 $SYSTEM_USER
 
 COPY assets/sbin/entrypoint.sh /sbin/entrypoint.sh
 ENTRYPOINT [ "/sbin/entrypoint.sh" ]
