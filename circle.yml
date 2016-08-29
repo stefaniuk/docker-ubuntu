@@ -11,4 +11,4 @@ dependencies:
     - mkdir -p ~/docker; docker save stefaniuk/ubuntu > ~/docker/image.tar
 test:
   override:
-    - docker run --interactive --tty stefaniuk/ubuntu echo "Hello World!"
+    - docker run --interactive --tty stefaniuk/ubuntu ps aux | grep 'user.\+ps aux'

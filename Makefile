@@ -29,7 +29,7 @@ test:
 		--name $(CONTAINER) \
 		--hostname $(CONTAINER) \
 		$(REPOSITORY) \
-		echo "Hello World!"
+		ps aux
 
 purge:
 	@docker rmi $(REPOSITORY) > /dev/null 2>&1 ||:

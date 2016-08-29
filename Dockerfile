@@ -1,7 +1,9 @@
 FROM ubuntu:16.04
 MAINTAINER daniel.stefaniuk@gmail.com
+# SEE: https://github.com/tianon/gosu
 
-ENV GOSU_VERSION="1.9" \
+ENV SYSTEM_USER="user" \
+    GOSU_VERSION="1.9" \
     GOSU_DOWNLOAD_URL="https://github.com/tianon/gosu/releases/download" \
     GOSU_GPG_KEY="B42F6819007F00F88E364FD4036A9C25BF357DD4"
 
@@ -17,9 +19,8 @@ RUN set -ex \
         unzip \
         vim.tiny \
         wget \
-    && rm -rf /tmp/* /var/tmp/* /var/lib/apt/lists/* \
+    && rm -rf /tmp/* /var/tmp/* /var/lib/apt/lists/* /var/cache/apt/* \
     \
-    # SEE: https://github.com/tianon/gosu
     && arch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" \
     && wget -O /usr/local/bin/gosu "$GOSU_DOWNLOAD_URL/$GOSU_VERSION/gosu-$arch" \
     && wget -O /usr/local/bin/gosu.asc "$GOSU_DOWNLOAD_URL/$GOSU_VERSION/gosu-$arch.asc" \
@@ -28,4 +29,10 @@ RUN set -ex \
     && gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu \
     && rm -r "$GNUPGHOME" /usr/local/bin/gosu.asc \
     && chmod +x /usr/local/bin/gosu \
-    && gosu nobody true
+    && gosu nobody true \
+    \
+    && groupadd --system $SYSTEM_USER \
+    && useradd --system --gid $SYSTEM_USER $SYSTEM_USER
+
+COPY assets/sbin/entrypoint.sh /sbin/entrypoint.sh
+ENTRYPOINT [ "/sbin/entrypoint.sh" ]
