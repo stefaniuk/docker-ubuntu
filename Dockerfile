@@ -14,8 +14,10 @@ RUN set -ex \
     && apt-get --yes install \
         ca-certificates \
         curl \
+        lsof \
         net-tools \
         netcat \
+        strace \
         unzip \
         vim.tiny \
         wget \
