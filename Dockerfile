@@ -39,7 +39,7 @@ RUN set -ex \
     && gosu nobody true \
     \
     && groupadd --system --gid $SYSTEM_USER_GID $SYSTEM_USER \
-    && useradd --system --no-create-home --uid $SYSTEM_USER_UID --gid $SYSTEM_USER_GID $SYSTEM_USER
+    && useradd --system --create-home --uid $SYSTEM_USER_UID --gid $SYSTEM_USER_GID $SYSTEM_USER
 
 COPY assets/sbin/entrypoint.sh /sbin/entrypoint.sh
 ENTRYPOINT [ "/sbin/entrypoint.sh" ]
