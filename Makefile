@@ -19,10 +19,10 @@ help:
 build:
 	@docker build \
 		--build-arg APT_PROXY=${APT_PROXY} \
-		--build-arg VERSION=$(cat VERSION) \
-		--build-arg BUILD_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ") \
-		--build-arg VCS_REF=$(git rev-parse --short HEAD) \
-		--build-arg VCS_URL=$(git config --get remote.origin.url) \
+		--build-arg VERSION=$(shell cat VERSION) \
+		--build-arg BUILD_DATE=$(shell date -u +"%Y-%m-%dT%H:%M:%SZ") \
+		--build-arg VCS_REF=$(shell git rev-parse --short HEAD) \
+		--build-arg VCS_URL=$(shell git config --get remote.origin.url) \
 		--tag $(IMAGE):$(shell cat VERSION) \
 		--rm .
 	@docker tag $(IMAGE):$(shell cat VERSION) $(IMAGE):latest
