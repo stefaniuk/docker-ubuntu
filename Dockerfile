@@ -43,3 +43,15 @@ RUN set -ex \
 
 COPY assets/sbin/entrypoint.sh /sbin/entrypoint.sh
 ENTRYPOINT [ "/sbin/entrypoint.sh" ]
+
+### METADATA ###################################################################
+
+ARG VERSION
+ARG BUILD_DATE
+ARG VCS_REF
+ARG VCS_URL
+LABEL \
+    io.github.stefaniuk.version=$VERSION \
+    io.github.stefaniuk.build-date=$BUILD_DATE \
+    io.github.stefaniuk.vcs-ref=$VCS_REF \
+    io.github.stefaniuk.vcs-url=$VCS_URL
