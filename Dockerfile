@@ -51,10 +51,10 @@ ARG BUILD_DATE
 ARG VCS_REF
 ARG VCS_URL
 LABEL \
-    io.github.stefaniuk.version="$VERSION" \
-    io.github.stefaniuk.build-date="$BUILD_DATE" \
-    io.github.stefaniuk.vcs-ref="$VCS_REF" \
-    io.github.stefaniuk.vcs-url="$VCS_URL" \
+    io.github.stefaniuk.version=$VERSION \
+    io.github.stefaniuk.build-date=$BUILD_DATE \
+    io.github.stefaniuk.vcs-ref=$VCS_REF \
+    io.github.stefaniuk.vcs-url=$VCS_URL \
     io.github.stefaniuk.vcs-type="Git" \
     io.github.stefaniuk.docker.dockerfile="/Dockerfile" \
     io.github.stefaniuk.license="MIT"
