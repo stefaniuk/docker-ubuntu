@@ -40,6 +40,7 @@ RUN set -ex \
     && chmod +x /usr/local/bin/gosu \
     && gosu nobody true \
     \
+    && locale-gen $LANG \
     && groupadd --system --gid $SYSTEM_USER_GID $SYSTEM_USER \
     && useradd --system --create-home --uid $SYSTEM_USER_UID --gid $SYSTEM_USER_GID $SYSTEM_USER
 
