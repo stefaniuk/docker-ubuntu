@@ -2,7 +2,9 @@ FROM ubuntu:16.04
 MAINTAINER daniel.stefaniuk@gmail.com
 
 ARG APT_PROXY
-ENV SYSTEM_USER="default" \
+ENV LANG="en_GB.UTF-8" \
+    LC_ALL="en_GB.UTF-8" \
+    SYSTEM_USER="default" \
     SYSTEM_USER_UID="1000" \
     SYSTEM_USER_GID="1000" \
     GOSU_VERSION="1.9" \
