@@ -2,7 +2,8 @@ FROM ubuntu:16.04
 MAINTAINER daniel.stefaniuk@gmail.com
 
 ARG APT_PROXY
-ENV LANG="en_GB.UTF-8" \
+ENV TZ="Europe/London" \
+    LANG="en_GB.UTF-8" \
     LC_ALL="en_GB.UTF-8" \
     SYSTEM_USER="default" \
     SYSTEM_USER_UID="1000" \
