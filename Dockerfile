@@ -20,6 +20,7 @@ RUN set -ex \
     && apt-get --yes install \
         ca-certificates \
         curl \
+        iputils-ping \
         lsof \
         net-tools \
         netcat \
