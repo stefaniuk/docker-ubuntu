@@ -2,19 +2,21 @@ FROM ubuntu:16.04
 MAINTAINER daniel.stefaniuk@gmail.com
 
 ARG APT_PROXY
+ARG APT_PROXY_SSL
 ENV TZ="Europe/London" \
     LANG="en_GB.UTF-8" \
     LC_ALL="en_GB.UTF-8" \
     SYSTEM_USER="default" \
     SYSTEM_USER_UID="1000" \
     SYSTEM_USER_GID="1000" \
-    GOSU_VERSION="1.9" \
+    GOSU_VERSION="1.10" \
     GOSU_DOWNLOAD_URL="https://github.com/tianon/gosu/releases/download" \
     GOSU_GPG_KEY="B42F6819007F00F88E364FD4036A9C25BF357DD4"
 
 RUN set -ex \
     \
-    && if [ -n "$APT_PROXY" ]; then echo "Acquire::http { Proxy \"$APT_PROXY\"; };" >> /etc/apt/apt.conf.d/00proxy; fi \
+    && if [ -n "$APT_PROXY" ]; then echo "Acquire::http { Proxy \"http://${APT_PROXY}\"; };" > /etc/apt/apt.conf.d/00proxy; fi \
+    && if [ -n "$APT_PROXY_SSL" ]; then echo "Acquire::https { Proxy \"https://${APT_PROXY_SSL}\"; };" > /etc/apt/apt.conf.d/00proxy; fi \
     && echo "APT::Install-Recommends 0;\nAPT::Install-Suggests 0;" >> /etc/apt/apt.conf.d/01norecommends \
     && apt-get --yes update \
     && apt-get --yes install \

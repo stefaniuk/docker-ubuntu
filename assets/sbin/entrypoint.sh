@@ -8,11 +8,8 @@ set -e
 for file in /sbin/init.d/*; do
     case "$file" in
         *.sh)
-            echo "$0: running $file"
+            echo "$0: Running $file"
             . $file
-            ;;
-        *)
-            echo "$0: ignoring $file"
             ;;
     esac
     echo

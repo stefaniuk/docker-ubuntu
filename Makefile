@@ -12,13 +12,14 @@ help:
 	@echo
 	@echo "Usage:"
 	@echo
-	@echo "    make build|push APT_PROXY=url"
+	@echo "    make build|push [APT_PROXY|APT_PROXY_SSL=ip:port]"
 	@echo "    make test|prune"
 	@echo
 
 build:
 	@docker build \
 		--build-arg APT_PROXY=${APT_PROXY} \
+		--build-arg APT_PROXY_SSL=${APT_PROXY_SSL} \
 		--build-arg VERSION=$(shell cat VERSION) \
 		--build-arg BUILD_DATE=$(shell date -u +"%Y-%m-%dT%H:%M:%SZ") \
 		--build-arg VCS_REF=$(shell git rev-parse --short HEAD) \
@@ -27,17 +28,17 @@ build:
 		--rm .
 	@docker tag $(IMAGE):$(shell cat VERSION) $(IMAGE):latest
 
-push:
-	@docker push $(IMAGE):$(shell cat VERSION)
-	@docker push $(IMAGE):latest
-	@curl --request POST "https://hooks.microbadger.com/images/stefaniuk/ubuntu/YVVi9RhnoYFbOQ9RqDwj-7o7m00="
-
 test:
 	@docker run --interactive --tty --rm \
 		--name $(NAME) \
 		--hostname $(NAME) \
 		$(IMAGE) \
 		ps aux
+
+push:
+	@docker push $(IMAGE):$(shell cat VERSION)
+	@docker push $(IMAGE):latest
+	@curl --request POST "https://hooks.microbadger.com/images/stefaniuk/ubuntu/YVVi9RhnoYFbOQ9RqDwj-7o7m00="
 
 prune:
 	@docker rmi $(IMAGE):$(shell cat VERSION) > /dev/null 2>&1 ||:
