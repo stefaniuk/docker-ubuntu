@@ -47,7 +47,7 @@ RUN set -ex \
     && gosu nobody true \
     \
     # SEE: https://github.com/stefaniuk/dotfiles
-    && curl -L https://raw.githubusercontent.com/stefaniuk/dotfiles/master/setup.sh -o - | /bin/bash -s -- \
+    && curl -L https://raw.githubusercontent.com/stefaniuk/dotfiles/master/dotfiles -o - | /bin/bash -s -- \
         --config=bash \
         --minimal \
     \
