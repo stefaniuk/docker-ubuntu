@@ -30,8 +30,10 @@ RUN set -ex \
         unzip \
         vim.tiny \
         wget \
-    && rm -rf /tmp/* /var/tmp/* /var/lib/apt/lists/* /var/cache/apt/* \
-    && rm -f /etc/apt/apt.conf.d/00proxy \
+    \
+    && locale-gen $LANG \
+    && groupadd --system --gid $SYSTEM_USER_GID $SYSTEM_USER \
+    && useradd --system --create-home --uid $SYSTEM_USER_UID --gid $SYSTEM_USER_GID $SYSTEM_USER \
     \
     # SEE: https://github.com/tianon/gosu
     && arch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" \
@@ -44,9 +46,13 @@ RUN set -ex \
     && chmod +x /usr/local/bin/gosu \
     && gosu nobody true \
     \
-    && locale-gen $LANG \
-    && groupadd --system --gid $SYSTEM_USER_GID $SYSTEM_USER \
-    && useradd --system --create-home --uid $SYSTEM_USER_UID --gid $SYSTEM_USER_GID $SYSTEM_USER
+    # SEE: https://github.com/stefaniuk/dotfiles
+    && curl -L https://raw.githubusercontent.com/stefaniuk/dotfiles/master/setup.sh -o - | /bin/bash -s -- \
+        --config=bash \
+        --minimal \
+    \
+    && rm -rf /tmp/* /var/tmp/* /var/lib/apt/lists/* /var/cache/apt/* \
+    && rm -f /etc/apt/apt.conf.d/00proxy
 
 COPY assets/sbin/entrypoint.sh /sbin/entrypoint.sh
 ENTRYPOINT [ "/sbin/entrypoint.sh" ]
