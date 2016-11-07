@@ -20,6 +20,7 @@ RUN set -ex \
     && if [ -n "$APT_PROXY_SSL" ]; then echo "Acquire::https { Proxy \"https://${APT_PROXY_SSL}\"; };" > /etc/apt/apt.conf.d/00proxy; fi \
     && echo "APT::Install-Recommends 0;\nAPT::Install-Suggests 0;" >> /etc/apt/apt.conf.d/01norecommends \
     && apt-get --yes update \
+    && apt-get --yes upgrade \
     && apt-get --yes install \
         ca-certificates \
         curl \
