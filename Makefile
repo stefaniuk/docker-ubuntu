@@ -50,7 +50,8 @@ test:
 		ps aux
 
 bash:
-	@docker exec --interactive --tty $(NAME) \
+	@docker exec --interactive --tty \
+		$(NAME) \
 		/bin/bash --login ||:
 
 clean:
