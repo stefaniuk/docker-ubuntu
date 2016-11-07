@@ -11,7 +11,8 @@ ENV TZ="Europe/London" \
     SYSTEM_USER_GID="1000" \
     GOSU_VERSION="1.10" \
     GOSU_DOWNLOAD_URL="https://github.com/tianon/gosu/releases/download" \
-    GOSU_GPG_KEY="B42F6819007F00F88E364FD4036A9C25BF357DD4"
+    GOSU_GPG_KEY="B42F6819007F00F88E364FD4036A9C25BF357DD4" \
+    RUN_AS=""
 
 RUN set -ex \
     \

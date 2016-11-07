@@ -33,6 +33,7 @@ create:
 	@docker create --interactive --tty \
 		--name $(NAME) \
 		--hostname $(NAME) \
+		--env "RUN_AS=default" \
 		$(IMAGE) \
 		/bin/bash --login
 
@@ -43,7 +44,9 @@ stop:
 	@docker stop $(NAME)
 
 test:
-	@docker exec --interactive --tty $(NAME) \
+	@docker exec --interactive --tty \
+		--user "default" \
+		$(NAME) \
 		ps aux
 
 bash:

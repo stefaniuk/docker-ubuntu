@@ -15,4 +15,8 @@ for file in /sbin/init.d/*; do
     echo
 done
 
-exec gosu $SYSTEM_USER "$@"
+if [ -z "$RUN_AS" ]; then
+    exec gosu $SYSTEM_USER "$@"
+elif [ -n "$RUN_AS" ]; then
+    exec gosu $RUN_AS "$@"
+fi
