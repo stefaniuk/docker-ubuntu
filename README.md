@@ -10,7 +10,7 @@ Installation
 
 Builds of the image are available on [Docker Hub](https://hub.docker.com/r/stefaniuk/ubuntu/).
 
-    docker pull stefaniuk/ubuntu:latest
+    docker pull stefaniuk/ubuntu
 
 Alternatively you can build the image yourself.
 
