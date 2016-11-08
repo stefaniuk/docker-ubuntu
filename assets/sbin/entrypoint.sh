@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+echo -e "\n *** stefaniuk/docker-ubuntu ***"
+
 # run bootstrap script
 [ -x /sbin/bootstrap.sh ] && . /sbin/bootstrap.sh "$@"
 
@@ -15,6 +17,7 @@ for file in /sbin/init.d/*; do
     echo
 done
 
+# run main process
 if [ -z "$RUN_AS" ]; then
     exec gosu $SYSTEM_USER "$@"
 elif [ -n "$RUN_AS" ]; then
