@@ -33,7 +33,6 @@ run:
 	@docker run --rm --interactive --tty \
 		--name $(NAME) \
 		--hostname $(NAME) \
-		--env "RUN_AS=default" \
 		$(IMAGE) \
 		/bin/bash --login
 
@@ -43,7 +42,6 @@ create:
 	@docker create --interactive --tty \
 		--name $(NAME) \
 		--hostname $(NAME) \
-		--env "RUN_AS=default" \
 		$(IMAGE) \
 		/bin/bash --login
 
