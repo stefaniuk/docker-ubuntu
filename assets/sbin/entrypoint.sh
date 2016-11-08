@@ -1,8 +1,6 @@
 #!/bin/bash
 set -e
 
-echo -e "\n *** stefaniuk/docker-ubuntu ***"
-
 # run bootstrap script
 [ -x /sbin/bootstrap.sh ] && . /sbin/bootstrap.sh "$@"
 
