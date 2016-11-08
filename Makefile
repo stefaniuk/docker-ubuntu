@@ -12,7 +12,7 @@ help:
 	@echo
 	@echo "Usage:"
 	@echo
-	@echo "    make build|run|create|start|stop|test|bash|clean|remove|push [APT_PROXY|APT_PROXY_SSL=ip:port]"
+	@echo "    make build|create|start|stop|test|bash|clean|remove|push [APT_PROXY|APT_PROXY_SSL=ip:port]"
 	@echo
 
 build:
@@ -26,15 +26,6 @@ build:
 		--tag $(IMAGE):$(shell cat VERSION) \
 		--rm .
 	@docker tag $(IMAGE):$(shell cat VERSION) $(IMAGE):latest
-
-run:
-	@docker stop $(IMAGE) > /dev/null 2>&1 ||:
-	@docker rm $(IMAGE) > /dev/null 2>&1 ||:
-	@docker run --rm --interactive --tty \
-		--name $(NAME) \
-		--hostname $(NAME) \
-		$(IMAGE) \
-		/bin/bash --login
 
 create:
 	@docker stop $(IMAGE) > /dev/null 2>&1 ||:
