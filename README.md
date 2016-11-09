@@ -16,3 +16,8 @@ Alternatively you can build the image yourself.
 
     docker build --tag stefaniuk/ubuntu \
         github.com/stefaniuk/docker-ubuntu
+
+Testing
+-------
+
+    make build create start bash
