@@ -24,6 +24,7 @@ RUN set -ex \
     && apt-get --yes install \
         ca-certificates \
         curl \
+        dnsutils \
         iputils-ping \
         lsof \
         net-tools \
