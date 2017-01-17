@@ -60,7 +60,7 @@ RUN set -ex \
     && rm -f /etc/apt/apt.conf.d/00proxy
 
 COPY assets/sbin/entrypoint.sh /sbin/entrypoint.sh
-ENTRYPOINT /sbin/entrypoint.sh
+ENTRYPOINT [ "/sbin/entrypoint.sh" ]
 
 ### METADATA ###################################################################
 
