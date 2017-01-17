@@ -54,6 +54,9 @@ RUN set -ex \
     && curl -L https://raw.githubusercontent.com/stefaniuk/dotfiles/master/dotfiles -o - | /bin/bash -s -- \
         --config=bash \
         --minimal \
+    && rm -r /home/$SYSTEM_USER \
+    && cp -r /root /home/$SYSTEM_USER \
+    && chown -R $SYSTEM_USER:$SYSTEM_USER /home/$SYSTEM_USER \
     \
     && rm -rf /tmp/* /var/tmp/* /var/lib/apt/lists/* /var/cache/apt/* \
     && rm -f /etc/apt/apt.conf.d/00proxy
