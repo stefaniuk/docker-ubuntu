@@ -5,6 +5,10 @@ set -e
 [[ "$DEBUG" =~ ^(true|yes|on|1|TRUE|YES|ON])$ ]] && set -x
 # trace
 [[ "$TRACE" =~ ^(true|yes|on|1|TRUE|YES|ON])$ ]] && trace="strace -f"
+# gosu
+if [[ "$GOSU" =~ ^(true|yes|on|1|TRUE|YES|ON])$ ]]; then
+    [ -n "$RUN_AS" ] && gosu="gosu $RUN_AS" || gosu="gosu $SYSTEM_USER"
+fi
 
 # run bootstrap script
 [ -x /sbin/bootstrap.sh ] && . /sbin/bootstrap.sh "$@"
@@ -21,8 +25,4 @@ for file in /sbin/init.d/*; do
 done
 
 # run main process
-if [ -z "$RUN_AS" ]; then
-    exec $trace gosu $SYSTEM_USER "$@"
-elif [ -n "$RUN_AS" ]; then
-    exec $trace gosu $RUN_AS "$@"
-fi
+exec $trace $gosu "$@"
