@@ -1,7 +1,10 @@
 #!/bin/bash
 set -e
 
+# debug
 [[ "$DEBUG" =~ ^(true|yes|on|1|TRUE|YES|ON])$ ]] && set -x
+# trace
+[[ "$TRACE" =~ ^(true|yes|on|1|TRUE|YES|ON])$ ]] && trace="strace -f"
 
 # run bootstrap script
 [ -x /sbin/bootstrap.sh ] && . /sbin/bootstrap.sh "$@"
@@ -19,7 +22,7 @@ done
 
 # run main process
 if [ -z "$RUN_AS" ]; then
-    exec gosu $SYSTEM_USER "$@"
+    exec $trace gosu $SYSTEM_USER "$@"
 elif [ -n "$RUN_AS" ]; then
-    exec gosu $RUN_AS "$@"
+    exec $trace gosu $RUN_AS "$@"
 fi
