@@ -1,5 +1,4 @@
 FROM ubuntu:xenial-20161213
-MAINTAINER daniel.stefaniuk@gmail.com
 
 ARG APT_PROXY
 ARG APT_PROXY_SSL
