@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+[[ "$DEBUG" =~ ^(true|yes|on|1|TRUE|YES|ON])$ ]] && set -x
+
 # run bootstrap script
 [ -x /sbin/bootstrap.sh ] && . /sbin/bootstrap.sh "$@"
 
