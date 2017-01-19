@@ -20,4 +20,4 @@ Alternatively you can build the image yourself.
 Testing
 -------
 
-    make build create start bash
+    make build start bash
