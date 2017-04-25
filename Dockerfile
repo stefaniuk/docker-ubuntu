@@ -1,4 +1,4 @@
-FROM ubuntu:xenial-20170214
+FROM ubuntu:xenial-20170410
 
 ARG APT_PROXY
 ARG APT_PROXY_SSL
@@ -26,15 +26,12 @@ RUN set -ex \
     && apt-get --yes install \
         ca-certificates \
         curl \
-        dnsutils \
         iputils-ping \
-        lsof \
-        net-tools \
+        locales \
         netcat \
         strace \
         unzip \
         vim.tiny \
-        wget \
     \
     && locale-gen $LANG \
     && groupadd --system --gid $SYSTEM_USER_GID $SYSTEM_USER \

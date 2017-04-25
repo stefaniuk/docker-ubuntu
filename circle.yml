@@ -7,15 +7,15 @@ dependencies:
   override:
     - docker info
     - if [[ -e ~/docker/image.tar ]]; then docker load --input ~/docker/image.tar; fi
-    - docker build --tag stefaniuk/ubuntu .
-    - mkdir -p ~/docker; docker save stefaniuk/ubuntu > ~/docker/image.tar
+    - docker build --tag codeworksio/ubuntu .
+    - mkdir -p ~/docker; docker save codeworksio/ubuntu > ~/docker/image.tar
 test:
   override:
-    - docker run --interactive --tty stefaniuk/ubuntu date | grep -v "UTC"
-    - docker run --interactive --tty stefaniuk/ubuntu locale | grep "LANG=en_GB.UTF-8"
-    - docker run --interactive --tty stefaniuk/ubuntu ps aux | grep "default.\+ps aux"
-    - docker run --interactive --tty --env "DEBUG=true" stefaniuk/ubuntu echo | grep "exec.\+echo"
-    - docker run --interactive --tty --env "GOSU=true" stefaniuk/ubuntu ps aux | grep "default.\+ps aux"
-    - docker run --interactive --tty --env "GOSU=false" stefaniuk/ubuntu ps aux | grep "root.\+ps aux"
-    - docker run --interactive --tty --env "RUN_AS=root" stefaniuk/ubuntu ps aux | grep "root.\+ps aux"
-    - docker run --interactive --tty --env "RUN_AS=root" stefaniuk/ubuntu ls /root/dotfiles | grep "/root/dotfiles"
+    - docker run --interactive --tty codeworksio/ubuntu date | grep -v "UTC"
+    - docker run --interactive --tty codeworksio/ubuntu locale | grep "LANG=en_GB.UTF-8"
+    - docker run --interactive --tty codeworksio/ubuntu ps aux | grep "default.\+ps aux"
+    - docker run --interactive --tty --env "DEBUG=true" codeworksio/ubuntu echo | grep "exec.\+echo"
+    - docker run --interactive --tty --env "GOSU=true" codeworksio/ubuntu ps aux | grep "default.\+ps aux"
+    - docker run --interactive --tty --env "GOSU=false" codeworksio/ubuntu ps aux | grep "root.\+ps aux"
+    - docker run --interactive --tty --env "RUN_AS=root" codeworksio/ubuntu ps aux | grep "root.\+ps aux"
+    - docker run --interactive --tty --env "RUN_AS=root" codeworksio/ubuntu ls /root/dotfiles | grep "/root/dotfiles"

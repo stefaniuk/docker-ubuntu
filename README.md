@@ -1,21 +1,21 @@
-[![Circle CI](https://circleci.com/gh/stefaniuk/docker-ubuntu.svg?style=shield "CircleCI")](https://circleci.com/gh/stefaniuk/docker-ubuntu)&nbsp;[![Size](https://images.microbadger.com/badges/image/stefaniuk/ubuntu.svg)](http://microbadger.com/images/stefaniuk/ubuntu)&nbsp;[![Version](https://images.microbadger.com/badges/version/stefaniuk/ubuntu.svg)](http://microbadger.com/images/stefaniuk/ubuntu)&nbsp;[![Commit](https://images.microbadger.com/badges/commit/stefaniuk/ubuntu.svg)](http://microbadger.com/images/stefaniuk/ubuntu)&nbsp;[![Docker Hub](https://img.shields.io/docker/pulls/stefaniuk/ubuntu.svg)](https://hub.docker.com/r/stefaniuk/ubuntu/)
+[![Circle CI](https://circleci.com/gh/codeworksio/docker-ubuntu.svg?style=shield "CircleCI")](https://circleci.com/gh/codeworksio/docker-ubuntu)&nbsp;[![Size](https://images.microbadger.com/badges/image/codeworksio/ubuntu.svg)](http://microbadger.com/images/codeworksio/ubuntu)&nbsp;[![Version](https://images.microbadger.com/badges/version/codeworksio/ubuntu.svg)](http://microbadger.com/images/codeworksio/ubuntu)&nbsp;[![Commit](https://images.microbadger.com/badges/commit/codeworksio/ubuntu.svg)](http://microbadger.com/images/codeworksio/ubuntu)&nbsp;[![Docker Hub](https://img.shields.io/docker/pulls/codeworksio/ubuntu.svg)](https://hub.docker.com/r/codeworksio/ubuntu/)
 
 Docker Ubuntu
 =============
 
-My customised Ubuntu baseimage.
+Customised Ubuntu base image.
 
 Installation
 ------------
 
-Builds of the image are available on [Docker Hub](https://hub.docker.com/r/stefaniuk/ubuntu/).
+Builds of the image are available on [Docker Hub](https://hub.docker.com/r/codeworksio/ubuntu/).
 
-    docker pull stefaniuk/ubuntu
+    docker pull codeworksio/ubuntu
 
 Alternatively you can build the image yourself.
 
-    docker build --tag stefaniuk/ubuntu \
-        github.com/stefaniuk/docker-ubuntu
+    docker build --tag codeworksio/ubuntu \
+        github.com/codeworksio/docker-ubuntu
 
 Testing
 -------
