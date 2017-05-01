@@ -2,19 +2,15 @@ FROM ubuntu:xenial-20170417.1
 
 ARG APT_PROXY
 ARG APT_PROXY_SSL
-ENV TZ="Europe/London" \
-    LANG="en_GB.UTF-8" \
-    LC_ALL="en_GB.UTF-8" \
-    SYSTEM_USER="default" \
-    SYSTEM_USER_UID="1000" \
-    SYSTEM_USER_GID="1000" \
-    GOSU_VERSION="1.10" \
+ENV GOSU_VERSION="1.10" \
     GOSU_DOWNLOAD_URL="https://github.com/tianon/gosu/releases/download" \
     GOSU_GPG_KEY="B42F6819007F00F88E364FD4036A9C25BF357DD4" \
-    INIT_DEBUG="false" \
-    INIT_TRACE="false" \
-    INIT_GOSU="true" \
-    INIT_RUN_AS=""
+    SYSTEM_USER="ubuntu" \
+    SYSTEM_USER_UID="1000" \
+    SYSTEM_USER_GID="1000" \
+    TZ="Europe/London" \
+    LANG="en_GB.UTF-8" \
+    LC_ALL="en_GB.UTF-8"
 
 RUN set -ex \
     \
@@ -33,9 +29,12 @@ RUN set -ex \
         unzip \
         vim.tiny \
     \
-    && locale-gen $LANG \
-    && groupadd --system --gid $SYSTEM_USER_GID $SYSTEM_USER \
-    && useradd --system --create-home --uid $SYSTEM_USER_UID --gid $SYSTEM_USER_GID $SYSTEM_USER \
+    # SEE: https://github.com/stefaniuk/dotfiles
+    && USER_NAME="$SYSTEM_USER" \
+    && USER_EMAIL="$SYSTEM_USER" \
+    && curl -L https://raw.githubusercontent.com/stefaniuk/dotfiles/master/dotfiles -o - | /bin/bash -s -- \
+        --config=bash \
+        --minimal \
     \
     # SEE: https://github.com/tianon/gosu
     && arch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" \
@@ -48,13 +47,17 @@ RUN set -ex \
     && chmod +x /usr/local/bin/gosu \
     && gosu nobody true \
     \
-    # SEE: https://github.com/stefaniuk/dotfiles
-    && curl -L https://raw.githubusercontent.com/stefaniuk/dotfiles/master/dotfiles -o - | /bin/bash -s -- \
-        --config=bash \
-        --minimal \
+    && groupadd --system --gid $SYSTEM_USER_GID $SYSTEM_USER \
+    && useradd --system --create-home --uid $SYSTEM_USER_UID --gid $SYSTEM_USER_GID $SYSTEM_USER \
+    && locale-gen $LANG \
     \
     && rm -rf /tmp/* /var/tmp/* /var/lib/apt/lists/* /var/cache/apt/* \
     && rm -f /etc/apt/apt.conf.d/00proxy
+
+ENV INIT_DEBUG="false" \
+    INIT_TRACE="false" \
+    INIT_GOSU="true" \
+    INIT_RUN_AS=""
 
 COPY assets/sbin/entrypoint.sh /sbin/entrypoint.sh
 ENTRYPOINT [ "/sbin/entrypoint.sh" ]
