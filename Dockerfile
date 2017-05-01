@@ -32,13 +32,11 @@ RUN set -ex \
         strace \
         unzip \
         vim.tiny \
+        wget \
     \
-    # SEE: https://github.com/stefaniuk/dotfiles
-    && USER_NAME="$SYSTEM_USER" \
-    && USER_EMAIL="$SYSTEM_USER" \
-    && curl -L https://raw.githubusercontent.com/stefaniuk/dotfiles/master/dotfiles -o - | /bin/bash -s -- \
-        --config=bash \
-        --minimal \
+    && groupadd --system --gid $SYSTEM_USER_GID $SYSTEM_USER \
+    && useradd --system --create-home --uid $SYSTEM_USER_UID --gid $SYSTEM_USER_GID $SYSTEM_USER \
+    && locale-gen $LANG \
     \
     # SEE: https://github.com/tianon/gosu
     && arch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" \
@@ -51,9 +49,12 @@ RUN set -ex \
     && chmod +x /usr/local/bin/gosu \
     && gosu nobody true \
     \
-    && groupadd --system --gid $SYSTEM_USER_GID $SYSTEM_USER \
-    && useradd --system --create-home --uid $SYSTEM_USER_UID --gid $SYSTEM_USER_GID $SYSTEM_USER \
-    && locale-gen $LANG \
+    # SEE: https://github.com/stefaniuk/dotfiles
+    && USER_NAME="$SYSTEM_USER" \
+    && USER_EMAIL="$SYSTEM_USER" \
+    && curl -L https://raw.githubusercontent.com/stefaniuk/dotfiles/master/dotfiles -o - | /bin/bash -s -- \
+        --config=bash \
+        --minimal \
     \
     && rm -rf /tmp/* /var/tmp/* /var/lib/apt/lists/* /var/cache/apt/* \
     && rm -f /etc/apt/apt.conf.d/00proxy
