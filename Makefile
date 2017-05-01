@@ -29,8 +29,8 @@ start:
 	docker run --detach --interactive --tty \
 		--name $(NAME) \
 		--hostname $(NAME) \
-		--env "DEBUG=true" \
-		--env "TRACE=false" \
+		--env "INIT_DEBUG=true" \
+		--env "INIT_TRACE=false" \
 		--privileged \
 		$(IMAGE) \
 		/bin/bash --login

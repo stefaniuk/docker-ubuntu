@@ -2,12 +2,12 @@
 set -e
 
 # debug
-[[ "$DEBUG" =~ ^(true|yes|on|1|TRUE|YES|ON)$ ]] && set -x
+[[ "$INIT_DEBUG" =~ ^(true|yes|on|1|TRUE|YES|ON)$ ]] && set -x
 # trace
-[[ "$TRACE" =~ ^(true|yes|on|1|TRUE|YES|ON)$ ]] && trace="strace -tt -T -v -s 65536 -f"
+[[ "$INIT_TRACE" =~ ^(true|yes|on|1|TRUE|YES|ON)$ ]] && trace="strace -tt -T -v -s 65536 -f"
 # gosu
-if [[ "$GOSU" =~ ^(true|yes|on|1|TRUE|YES|ON)$ ]]; then
-    [ -n "$RUN_AS" ] && gosu="gosu $RUN_AS" || gosu="gosu $SYSTEM_USER"
+if [[ "$INIT_GOSU" =~ ^(true|yes|on|1|TRUE|YES|ON)$ ]]; then
+    [ -n "$INIT_RUN_AS" ] && gosu="gosu $INIT_RUN_AS" || gosu="gosu $SYSTEM_USER"
 fi
 
 # run bootstrap script
