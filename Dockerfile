@@ -10,8 +10,8 @@ ENV GOSU_VERSION="1.10" \
     SYSTEM_USER_GID="1000" \
     TZ="Europe/London" \
     LANG="en_GB.UTF-8" \
-    LC_ALL="en_GB.UTF-8" \
-    INIT_DEBUG="false" \
+    LC_ALL="en_GB.UTF-8"
+ENV INIT_DEBUG="false" \
     INIT_TRACE="false" \
     INIT_GOSU="true" \
     INIT_RUN_AS=""
@@ -24,11 +24,17 @@ RUN set -ex \
     && apt-get --yes update \
     && apt-get --yes upgrade \
     && apt-get --yes install \
+        apt-file \
+        apt-transport-https \
+        apt-utils \
         ca-certificates \
         curl \
+        debconf-utils \
+        dialog \
         iputils-ping \
         locales \
         netcat \
+        software-properties-common \
         strace \
         unzip \
         vim.tiny \
