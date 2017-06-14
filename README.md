@@ -20,15 +20,18 @@ Alternatively you can build the image yourself.
 Configuration
 -------------
 
-- `/sbin/entrypoint.sh` is defined as the entrypoint
-- `/sbin/bootstrap.sh` is sourced if present
-- `/sbin/init.d/*.sh` are sourced if present
-- Set `INIT_DEBUG=true` to enable verbose output
-- Set `INIT_TRACE=true` to pass the main process to `strace` (use along with `--privileged`)
-- Set `INIT_RUN_AS=root` to start the main process as a privileged user
-- Set `INIT_GOSU=true` to make use of `gosu` (default)
-- Use `--privileged` flag to give extended privileges to this container
-- Use `--cap-add` and `--cap-drop` to control Linux kernel capabilities
+* `assets/sbin/init.sh` is copied on build if present to the `/sbin` directory
+* `/sbin/entrypoint.sh` is defined as the entrypoint
+* `/sbin/bootstrap.sh` is sourced if present
+* `/sbin/init.d/*.sh` are sourced if present
+* Docker environment variables
+    - `INIT_DEBUG=true` enable verbose output
+    - `INIT_TRACE=true` pass the main process to `strace` (use along with `--privileged`)
+    - `INIT_RUN_AS=root` start the main process as a privileged user
+    - `INIT_GOSU=true` make use of `gosu` (default)
+* Docker runtime flags
+    - `--privileged` give container extended privileges
+    - `--cap-add`, `--cap-drop` control Linux kernel capabilities
 
 Testing
 -------
