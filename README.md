@@ -20,10 +20,7 @@ Alternatively you can build the image yourself.
 Configuration
 -------------
 
-* On build triggers are set to copy entrypoint resources
-    - `assets/sbin/bootstrap.sh`
-    - `assets/sbin/init.d/*.sh`
-    - `assets/sbin/init.sh`
+* On build trigger is set to copy all the assets
 * `/sbin/entrypoint.sh` is defined as the entrypoint
 * `/sbin/bootstrap.sh` is sourced if present
 * `/sbin/init.d/*.sh` are sourced if present
