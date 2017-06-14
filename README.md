@@ -20,10 +20,14 @@ Alternatively you can build the image yourself.
 Configuration
 -------------
 
-* `assets/sbin/init.sh` is copied on build if present to the `/sbin` directory
+* On build triggers are set to copy entrypoint resources
+    - `assets/sbin/bootstrap.sh`
+    - `assets/sbin/init.d/*.sh`
+    - `assets/sbin/init.sh`
 * `/sbin/entrypoint.sh` is defined as the entrypoint
 * `/sbin/bootstrap.sh` is sourced if present
 * `/sbin/init.d/*.sh` are sourced if present
+* Use for example `CMD [ "/sbin/init.sh" ]` in a child image to run your process
 * Docker environment variables
     - `INIT_DEBUG=true` enable verbose output
     - `INIT_TRACE=true` pass the main process to `strace` (use along with `--privileged`)
