@@ -31,8 +31,6 @@ start:
 		--name $(NAME) \
 		--hostname $(NAME) \
 		--env "INIT_DEBUG=true" \
-		--env "INIT_TRACE=false" \
-		--privileged \
 		$(IMAGE) \
 		/bin/bash --login
 
