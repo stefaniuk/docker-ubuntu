@@ -2,10 +2,7 @@ FROM ubuntu:xenial-20170517.1
 
 ARG APT_PROXY
 ARG APT_PROXY_SSL
-ENV GOSU_VERSION="1.10" \
-    GOSU_DOWNLOAD_URL="https://github.com/tianon/gosu/releases/download" \
-    GOSU_GPG_KEY="B42F6819007F00F88E364FD4036A9C25BF357DD4" \
-    SYSTEM_USER="ubuntu" \
+ENV SYSTEM_USER="ubuntu" \
     SYSTEM_USER_UID="1000" \
     SYSTEM_USER_GID="1000" \
     TZ="Europe/London" \
@@ -17,6 +14,10 @@ ENV GOSU_VERSION="1.10" \
     INIT_RUN_AS=""
 
 RUN set -ex \
+    \
+    && GOSU_VERSION="1.10" \
+    && GOSU_DOWNLOAD_URL="https://github.com/tianon/gosu/releases/download" \
+    && GOSU_GPG_KEY="B42F6819007F00F88E364FD4036A9C25BF357DD4" \
     \
     && if [ -n "$APT_PROXY" ]; then echo "Acquire::http { Proxy \"http://${APT_PROXY}\"; };" > /etc/apt/apt.conf.d/00proxy; fi \
     && if [ -n "$APT_PROXY_SSL" ]; then echo "Acquire::https { Proxy \"https://${APT_PROXY_SSL}\"; };" > /etc/apt/apt.conf.d/00proxy; fi \
