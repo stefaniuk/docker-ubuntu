@@ -20,7 +20,6 @@ Alternatively you can build the image yourself.
 Configuration
 -------------
 
-* On build trigger is set to copy all the assets
 * `/sbin/entrypoint.sh` is defined as the entrypoint
 * `/sbin/bootstrap.sh` is sourced if present
 * `/sbin/init.d/*.sh` are sourced if present
@@ -38,3 +37,8 @@ Testing
 -------
 
     make build start bash
+
+TODO
+----
+
+* Install system packages using `dotfiles --install` feature
