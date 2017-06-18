@@ -10,8 +10,8 @@ ENV GOSU_VERSION="1.10" \
     SYSTEM_USER_GID="1000" \
     TZ="Europe/London" \
     LANG="en_GB.UTF-8" \
-    LC_ALL="en_GB.UTF-8"
-ENV INIT_DEBUG="false" \
+    LC_ALL="en_GB.UTF-8" \
+    INIT_DEBUG="false" \
     INIT_TRACE="false" \
     INIT_GOSU="true" \
     INIT_RUN_AS=""
@@ -63,9 +63,7 @@ RUN set -ex \
     && rm -rf /tmp/* /var/tmp/* /var/lib/apt/lists/* /var/cache/apt/* \
     && rm -f /etc/apt/apt.conf.d/00proxy
 
-COPY assets/sbin/entrypoint.sh /sbin/entrypoint.sh
-
-ONBUILD COPY assets/ /
+COPY assets/ /
 
 ENTRYPOINT [ "/sbin/entrypoint.sh" ]
 
