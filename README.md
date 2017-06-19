@@ -21,7 +21,6 @@ Configuration
 -------------
 
 * `/sbin/entrypoint.sh` is defined as the entrypoint
-* `/sbin/bootstrap.sh` is sourced if present
 * `/sbin/init.d/*.sh` are sourced if present
 * Use for example `CMD [ "/sbin/init.sh" ]` in a child image to run your process
 * Docker environment variables
