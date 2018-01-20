@@ -15,8 +15,9 @@ build:
 	docker build \
 		--build-arg APT_PROXY=${APT_PROXY} \
 		--build-arg APT_PROXY_SSL=${APT_PROXY_SSL} \
-		--build-arg VERSION=$(shell cat VERSION) \
+		--build-arg IMAGE=${IMAGE} \
 		--build-arg BUILD_DATE=$(shell date -u +"%Y-%m-%dT%H:%M:%SZ") \
+		--build-arg VERSION=$(shell cat VERSION) \
 		--build-arg VCS_REF=$(shell git rev-parse --short HEAD) \
 		--build-arg VCS_URL=$(shell git config --get remote.origin.url) \
 		--tag $(IMAGE):$(shell cat VERSION) \
