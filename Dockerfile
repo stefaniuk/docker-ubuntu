@@ -82,5 +82,4 @@ LABEL \
     org.label-schema.version=$VERSION \
     org.label-schema.vcs-ref=$VCS_REF \
     org.label-schema.vcs-url=$VCS_URL \
-    org.label-schema.url=$VCS_URL \
     org.label-schema.schema-version="1.0"
