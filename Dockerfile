@@ -13,6 +13,8 @@ ENV SYSTEM_USER="ubuntu" \
     INIT_GOSU="true" \
     INIT_RUN_AS=""
 
+COPY assets/ /
+
 RUN set -ex \
     \
     && GOSU_VERSION="1.10" \
@@ -63,8 +65,6 @@ RUN set -ex \
     \
     && rm -rf /tmp/* /var/tmp/* /var/lib/apt/lists/* /var/cache/apt/* \
     && rm -f /etc/apt/apt.conf.d/00proxy
-
-COPY assets/ /
 
 ENTRYPOINT [ "/sbin/entrypoint.sh" ]
 
