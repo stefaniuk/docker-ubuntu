@@ -52,7 +52,7 @@ RUN set -ex \
     && export GNUPGHOME="$(mktemp -d)" \
     && gpg --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-keys $GOSU_GPG_KEY \
     && gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu \
-    && rm -r "$GNUPGHOME" /usr/local/bin/gosu.asc \
+    && rm -rf $GNUPGHOME /usr/local/bin/gosu.asc \
     && chmod +x /usr/local/bin/gosu \
     && gosu nobody true \
     \
