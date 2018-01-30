@@ -59,7 +59,8 @@ RUN set -ex \
     # SEE: https://github.com/stefaniuk/dotfiles
     && USER_NAME="$SYSTEM_USER" \
     && USER_EMAIL="$SYSTEM_USER" \
-    && curl -L https://raw.githubusercontent.com/stefaniuk/dotfiles/master/dotfiles -o - | /bin/bash -s \
+    && curl -L https://raw.githubusercontent.com/stefaniuk/dotfiles/master/dotfiles -o - | /bin/bash -s -- \
+        --minimal \
     \
     && rm -rf /tmp/* /var/tmp/* /var/lib/apt/lists/* /var/cache/apt/* \
     && rm -f /etc/apt/apt.conf.d/00proxy
