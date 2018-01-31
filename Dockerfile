@@ -1,4 +1,4 @@
-FROM ubuntu:xenial-20180112.1
+FROM ubuntu:xenial-20180123
 
 ARG APT_PROXY
 ARG APT_PROXY_SSL
