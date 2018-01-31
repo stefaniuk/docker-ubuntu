@@ -46,9 +46,8 @@ RUN set -ex \
     && locale-gen $LANG \
     \
     # SEE: https://github.com/tianon/gosu
-    && arch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" \
-    && curl -L "$GOSU_DOWNLOAD_URL/$GOSU_VERSION/gosu-$arch" -o /usr/local/bin/gosu \
-    && curl -L "$GOSU_DOWNLOAD_URL/$GOSU_VERSION/gosu-$arch.asc" -o /usr/local/bin/gosu.asc \
+    && curl -L "$GOSU_DOWNLOAD_URL/$GOSU_VERSION/gosu-amd64" -o /usr/local/bin/gosu \
+    && curl -L "$GOSU_DOWNLOAD_URL/$GOSU_VERSION/gosu-amd64.asc" -o /usr/local/bin/gosu.asc \
     && export GNUPGHOME="$(mktemp -d)" \
     && gpg --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-keys $GOSU_GPG_KEY \
     && gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu \
