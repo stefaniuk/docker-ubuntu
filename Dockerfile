@@ -19,28 +19,18 @@ RUN set -ex \
     && GOSU_DOWNLOAD_URL="https://github.com/tianon/gosu/releases/download" \
     && GOSU_GPG_KEY="B42F6819007F00F88E364FD4036A9C25BF357DD4" \
     \
+    # install system packages
     && if [ -n "$APT_PROXY" ]; then echo "Acquire::http { Proxy \"http://${APT_PROXY}\"; };" > /etc/apt/apt.conf.d/00proxy; fi \
     && if [ -n "$APT_PROXY_SSL" ]; then echo "Acquire::https { Proxy \"https://${APT_PROXY_SSL}\"; };" > /etc/apt/apt.conf.d/00proxy; fi \
     && echo "APT::Install-Recommends 0;\nAPT::Install-Suggests 0;" >> /etc/apt/apt.conf.d/01norecommends \
     && apt-get --yes update \
     && apt-get --yes upgrade \
     && apt-get --yes install \
-        apt-file \
-        apt-transport-https \
-        apt-utils \
         ca-certificates \
         curl \
-        debconf-utils \
-        dialog \
-        iputils-ping \
         locales \
-        netcat \
-        software-properties-common \
-        strace \
-        unzip \
-        vim.tiny \
-        wget \
     \
+    # configure system user
     && groupadd --system --gid $SYSTEM_USER_GID $SYSTEM_USER \
     && useradd --system --create-home --uid $SYSTEM_USER_UID --gid $SYSTEM_USER_GID $SYSTEM_USER \
     && locale-gen $LANG \

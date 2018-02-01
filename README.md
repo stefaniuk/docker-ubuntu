@@ -36,8 +36,3 @@ Testing
 -------
 
     make build start bash
-
-TODO
-----
-
-* Install system packages using `dotfiles --install` feature
