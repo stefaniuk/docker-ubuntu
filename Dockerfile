@@ -1,4 +1,4 @@
-FROM ubuntu:xenial-20180123
+FROM ubuntu:bionic-20180125
 
 ARG APT_PROXY
 ARG APT_PROXY_SSL
@@ -28,6 +28,8 @@ RUN set -ex \
     && apt-get --yes install \
         ca-certificates \
         curl \
+        dirmngr \
+        gnupg \
         locales \
     \
     # configure system user
