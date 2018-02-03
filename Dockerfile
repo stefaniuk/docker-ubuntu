@@ -2,7 +2,8 @@ FROM ubuntu:bionic-20180125
 
 ARG APT_PROXY
 ARG APT_PROXY_SSL
-ENV SYSTEM_USER="ubuntu" \
+ENV DEBIAN_FRONTEND="noninteractive" \
+    SYSTEM_USER="ubuntu" \
     SYSTEM_USER_UID="1000" \
     SYSTEM_USER_GID="1000" \
     TZ="Europe/London" \
