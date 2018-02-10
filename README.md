@@ -25,14 +25,12 @@ Configuration
 * Use for example `CMD [ "/sbin/init.sh" ]` in a child image to run your process
 * Docker environment variables
     - `INIT_DEBUG=true` enable verbose output
-    - `INIT_TRACE=true` pass the main process to `strace` (use along with `--privileged`)
+    - `INIT_TRACE=true` pass the main process to `strace` (use along with the Docker flag `--privileged`)
     - `INIT_RUN_AS=root` start the main process as a privileged user
     - `INIT_GOSU=true` make use of `gosu` (default)
-* Docker runtime flags
-    - `--privileged` give container extended privileges
-    - `--cap-add`, `--cap-drop` control Linux kernel capabilities
 
 Testing
 -------
 
     make build start bash
+    make stop
