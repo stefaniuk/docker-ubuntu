@@ -16,6 +16,7 @@ ENV DEBIAN_FRONTEND="noninteractive" \
 
 RUN set -ex \
     \
+    # set internal variables
     && GOSU_VERSION="1.10" \
     && GOSU_DOWNLOAD_URL="https://github.com/tianon/gosu/releases/download" \
     && GOSU_GPG_KEY="B42F6819007F00F88E364FD4036A9C25BF357DD4" \
@@ -33,11 +34,6 @@ RUN set -ex \
         gnupg \
         locales \
     \
-    # configure system user
-    && groupadd --system --gid $SYSTEM_USER_GID $SYSTEM_USER \
-    && useradd --system --create-home --uid $SYSTEM_USER_UID --gid $SYSTEM_USER_GID $SYSTEM_USER \
-    && locale-gen $LANG \
-    \
     # SEE: https://github.com/tianon/gosu
     && curl -L "$GOSU_DOWNLOAD_URL/$GOSU_VERSION/gosu-amd64" -o /usr/local/bin/gosu \
     && curl -L "$GOSU_DOWNLOAD_URL/$GOSU_VERSION/gosu-amd64.asc" -o /usr/local/bin/gosu.asc \
@@ -49,10 +45,13 @@ RUN set -ex \
     && gosu nobody true \
     \
     # SEE: https://github.com/stefaniuk/dotfiles
-    && USER_NAME="$SYSTEM_USER" \
-    && USER_EMAIL="$SYSTEM_USER" \
     && curl -L https://raw.githubusercontent.com/stefaniuk/dotfiles/master/dotfiles -o - | /bin/bash -s -- \
         --minimal \
+    \
+    # configure system user
+    && groupadd --system --gid $SYSTEM_USER_GID $SYSTEM_USER \
+    && useradd --system --create-home --uid $SYSTEM_USER_UID --gid $SYSTEM_USER_GID $SYSTEM_USER \
+    && locale-gen $LANG \
     \
     && rm -rf /tmp/* /var/tmp/* /var/lib/apt/lists/* /var/cache/apt/* \
     && rm -f /etc/apt/apt.conf.d/00proxy
