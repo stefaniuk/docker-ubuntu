@@ -41,11 +41,22 @@ log:
 	docker logs --follow $(NAME)
 
 test:
-	docker exec --interactive --tty \
-		--user ubuntu \
-		$(NAME) \
-		ps auxw \
-	| grep "ubuntu.\+ps aux"
+	docker run --interactive --tty --rm codeworksio/ubuntu \
+		date | grep -v "UTC"
+	docker run --interactive --tty --rm codeworksio/ubuntu \
+		locale | grep "LANG=en_GB.UTF-8"
+	docker run --interactive --tty --rm codeworksio/ubuntu \
+		ps aux | grep "ubuntu.\+ps aux"
+	docker run --interactive --tty --rm --env "INIT_DEBUG=true" codeworksio/ubuntu \
+		echo | grep "exec.\+echo"
+	docker run --interactive --tty --rm --env "INIT_GOSU=true" codeworksio/ubuntu \
+		ps aux | grep "ubuntu.\+ps aux"
+	docker run --interactive --tty --rm --env "INIT_GOSU=false" codeworksio/ubuntu \
+		ps aux | grep "root.\+ps aux"
+	docker run --interactive --tty --rm --env "INIT_RUN_AS=root" codeworksio/ubuntu \
+		ps aux | grep "root.\+ps aux"
+	docker run --interactive --tty --rm --env "INIT_RUN_AS=root" codeworksio/ubuntu \
+		ls /root/dotfiles | grep "/root/dotfiles"
 
 bash:
 	docker exec --interactive --tty \
