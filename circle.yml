@@ -1,21 +1,7 @@
 machine:
   services:
     - docker
-dependencies:
-  cache_directories:
-    - "~/docker"
-  override:
-    - docker info
-    - if [[ -e ~/docker/image.tar ]]; then docker load --input ~/docker/image.tar; fi
-    - docker build --tag codeworksio/ubuntu .
-    - mkdir -p ~/docker; docker save codeworksio/ubuntu > ~/docker/image.tar
 test:
   override:
-    - docker run --interactive --tty codeworksio/ubuntu date | grep -v "UTC"
-    - docker run --interactive --tty codeworksio/ubuntu locale | grep "LANG=en_GB.UTF-8"
-    - docker run --interactive --tty codeworksio/ubuntu ps aux | grep "ubuntu.\+ps aux"
-    - docker run --interactive --tty --env "INIT_DEBUG=true" codeworksio/ubuntu echo | grep "exec.\+echo"
-    - docker run --interactive --tty --env "INIT_GOSU=true" codeworksio/ubuntu ps aux | grep "ubuntu.\+ps aux"
-    - docker run --interactive --tty --env "INIT_GOSU=false" codeworksio/ubuntu ps aux | grep "root.\+ps aux"
-    - docker run --interactive --tty --env "INIT_RUN_AS=root" codeworksio/ubuntu ps aux | grep "root.\+ps aux"
-    - docker run --interactive --tty --env "INIT_RUN_AS=root" codeworksio/ubuntu ls /root/dotfiles | grep "/root/dotfiles"
+    - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+    - make build start test push

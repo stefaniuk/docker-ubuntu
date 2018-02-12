@@ -44,7 +44,8 @@ test:
 	docker exec --interactive --tty \
 		--user ubuntu \
 		$(NAME) \
-		ps auxw
+		ps auxw \
+	| grep "ubuntu.\+ps aux"
 
 bash:
 	docker exec --interactive --tty \
