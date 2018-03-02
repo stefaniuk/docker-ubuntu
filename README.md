@@ -34,3 +34,8 @@ Testing
 
     make build start bash
     make stop
+
+TODO
+----
+
+* Check [Tini](https://github.com/krallin/tini)
