@@ -7,8 +7,8 @@ ENV DEBIAN_FRONTEND="noninteractive" \
     SYSTEM_USER_UID="1000" \
     SYSTEM_USER_GID="1000" \
     TZ="Europe/London" \
-    LANG="en_GB.UTF-8" \
-    LC_ALL="en_GB.UTF-8" \
+    LANG="C.UTF-8" \
+    LC_ALL="C.UTF-8" \
     INIT_DEBUG="false" \
     INIT_TRACE="false" \
     INIT_GOSU="true" \
@@ -32,7 +32,6 @@ RUN set -ex && \
         curl \
         dirmngr \
         gnupg \
-        locales \
     && \
     # SEE: https://github.com/tianon/gosu
     curl -L "$GOSU_DOWNLOAD_URL/$GOSU_VERSION/gosu-amd64" -o /usr/local/bin/gosu && \
@@ -51,7 +50,6 @@ RUN set -ex && \
     # configure system user
     groupadd --system --gid $SYSTEM_USER_GID $SYSTEM_USER && \
     useradd --system --create-home --uid $SYSTEM_USER_UID --gid $SYSTEM_USER_GID $SYSTEM_USER && \
-    locale-gen $LANG && \
     \
     rm -rf /tmp/* /var/tmp/* /var/lib/apt/lists/* /var/cache/apt/* && \
     rm -f /etc/apt/apt.conf.d/00proxy

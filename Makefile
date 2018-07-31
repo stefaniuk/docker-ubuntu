@@ -44,7 +44,7 @@ test:
 	docker run --interactive --tty --rm codeworksio/ubuntu \
 		date | grep -v "UTC"
 	docker run --interactive --tty --rm codeworksio/ubuntu \
-		locale | grep "LANG=en_GB.UTF-8"
+		locale | grep "LANG=C.UTF-8"
 	docker run --interactive --tty --rm codeworksio/ubuntu \
 		ps aux | grep "ubuntu.\+ps aux"
 	docker run --interactive --tty --rm --env "INIT_DEBUG=true" codeworksio/ubuntu \
