@@ -1,4 +1,4 @@
-FROM ubuntu:bionic-20180125
+FROM ubuntu:bionic-20180724.1
 
 ARG APT_PROXY
 ARG APT_PROXY_SSL
