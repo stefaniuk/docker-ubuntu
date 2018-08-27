@@ -74,4 +74,4 @@ push:
 	sleep 10
 	curl --request POST "https://hooks.microbadger.com/images/$(IMAGE)/XEdph00Tmp3rO0XYNLevZjjLeO4="
 
-.SILENT:
+.SILENT: help
