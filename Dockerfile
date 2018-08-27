@@ -1,14 +1,14 @@
-FROM ubuntu:bionic-20180724.1
+FROM ubuntu:bionic-20180821
 
 ARG APT_PROXY
 ARG APT_PROXY_SSL
 ENV DEBIAN_FRONTEND="noninteractive" \
-    SYSTEM_USER="ubuntu" \
-    SYSTEM_USER_UID="1000" \
-    SYSTEM_USER_GID="1000" \
     TZ="Europe/London" \
     LANG="C.UTF-8" \
     LC_ALL="C.UTF-8" \
+    SYSTEM_USER="ubuntu" \
+    SYSTEM_USER_UID="1000" \
+    SYSTEM_USER_GID="1000" \
     INIT_DEBUG="false" \
     INIT_TRACE="false" \
     INIT_GOSU="true" \
