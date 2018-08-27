@@ -16,11 +16,6 @@ ENV DEBIAN_FRONTEND="noninteractive" \
 
 RUN set -ex && \
     \
-    # set internal variables
-    GOSU_VERSION="1.10" && \
-    GOSU_DOWNLOAD_URL="https://github.com/tianon/gosu/releases/download" && \
-    GOSU_GPG_KEY="B42F6819007F00F88E364FD4036A9C25BF357DD4" && \
-    \
     # install system packages
     if [ -n "$APT_PROXY" ]; then echo "Acquire::http { Proxy \"http://${APT_PROXY}\"; };" > /etc/apt/apt.conf.d/00proxy; fi && \
     if [ -n "$APT_PROXY_SSL" ]; then echo "Acquire::https { Proxy \"https://${APT_PROXY_SSL}\"; };" > /etc/apt/apt.conf.d/00proxy; fi && \
@@ -34,13 +29,13 @@ RUN set -ex && \
         gnupg \
     && \
     # SEE: https://github.com/tianon/gosu
-    curl -L "$GOSU_DOWNLOAD_URL/$GOSU_VERSION/gosu-amd64" -o /usr/local/bin/gosu && \
-    curl -L "$GOSU_DOWNLOAD_URL/$GOSU_VERSION/gosu-amd64.asc" -o /usr/local/bin/gosu.asc && \
-    export GNUPGHOME="$(mktemp -d)" && \
-    gpg --keyserver "hkp://p80.pool.sks-keyservers.net:80" --recv-keys $GOSU_GPG_KEY && \
-    gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu && \
-    rm -rf $GNUPGHOME /usr/local/bin/gosu.asc && \
-    chmod +x /usr/local/bin/gosu && \
+    GOSU_VERSION="1.10" && \
+    GOSU_DOWNLOAD_URL="https://github.com/tianon/gosu/releases/download" && \
+    curl -L "$GOSU_DOWNLOAD_URL/$GOSU_VERSION/gosu-amd64" -o /bin/gosu && \
+    curl -L "$GOSU_DOWNLOAD_URL/$GOSU_VERSION/gosu-amd64.asc" -o /tmp/gosu.asc && \
+    gpg --keyserver "hkp://p80.pool.sks-keyservers.net:80" --recv-keys "B42F6819007F00F88E364FD4036A9C25BF357DD4" && \
+    gpg --verify /tmp/gosu.asc /bin/gosu && \
+    chmod +x /bin/gosu && \
     gosu nobody true && \
     \
     # SEE: https://github.com/stefaniuk/dotfiles
