@@ -34,3 +34,8 @@ Testing
 
     make build start bash
     make stop
+
+TODO
+----
+
+* Check if [Linux Enhanced BPF (eBPF)](http://www.brendangregg.com/ebpf.html) can provide better tracing than `strace`

@@ -41,21 +41,21 @@ log:
 	docker logs --follow $(NAME)
 
 test:
-	docker run --interactive --tty --rm codeworksio/ubuntu \
+	docker run --interactive --tty --rm $(IMAGE) \
 		date | grep -v "UTC"
-	docker run --interactive --tty --rm codeworksio/ubuntu \
+	docker run --interactive --tty --rm $(IMAGE) \
 		locale | grep "LANG=C.UTF-8"
-	docker run --interactive --tty --rm codeworksio/ubuntu \
-		ps aux | grep "ubuntu.\+ps aux"
-	docker run --interactive --tty --rm --env "INIT_DEBUG=true" codeworksio/ubuntu \
+	docker run --interactive --tty --rm $(IMAGE) \
+		ps aux | grep "default.\+ps aux"
+	docker run --interactive --tty --rm --env "INIT_DEBUG=true" $(IMAGE) \
 		echo | grep "exec.\+echo"
-	docker run --interactive --tty --rm --env "INIT_GOSU=true" codeworksio/ubuntu \
-		ps aux | grep "ubuntu.\+ps aux"
-	docker run --interactive --tty --rm --env "INIT_GOSU=false" codeworksio/ubuntu \
+	docker run --interactive --tty --rm --env "INIT_GOSU=true" $(IMAGE) \
+		ps aux | grep "default.\+ps aux"
+	docker run --interactive --tty --rm --env "INIT_GOSU=false" $(IMAGE) \
 		ps aux | grep "root.\+ps aux"
-	docker run --interactive --tty --rm --env "INIT_RUN_AS=root" codeworksio/ubuntu \
+	docker run --interactive --tty --rm --env "INIT_RUN_AS=root" $(IMAGE) \
 		ps aux | grep "root.\+ps aux"
-	docker run --interactive --tty --rm --env "INIT_RUN_AS=root" codeworksio/ubuntu \
+	docker run --interactive --tty --rm --env "INIT_RUN_AS=root" $(IMAGE) \
 		ls /root/dotfiles | grep "/root/dotfiles"
 
 bash:
