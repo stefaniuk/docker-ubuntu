@@ -1,4 +1,4 @@
-FROM ubuntu:bionic-20180821
+FROM ubuntu:bionic-20190204
 
 ARG APT_PROXY
 ARG APT_PROXY_SSL
@@ -29,7 +29,7 @@ RUN set -ex && \
         gnupg \
     && \
     # SEE: https://github.com/tianon/gosu
-    GOSU_VERSION="1.10" && \
+    GOSU_VERSION="1.11" && \
     GOSU_DOWNLOAD_URL="https://github.com/tianon/gosu/releases/download" && \
     curl -L "$GOSU_DOWNLOAD_URL/$GOSU_VERSION/gosu-amd64" -o /bin/gosu && \
     curl -L "$GOSU_DOWNLOAD_URL/$GOSU_VERSION/gosu-amd64.asc" -o /tmp/gosu.asc && \
