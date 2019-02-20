@@ -25,23 +25,19 @@ RUN set -ex && \
     apt-get --yes install \
         ca-certificates \
         curl \
-        dirmngr \
-        gnupg \
+        locales \
     && \
     # SEE: https://github.com/tianon/gosu
     GOSU_VERSION="1.11" && \
     GOSU_DOWNLOAD_URL="https://github.com/tianon/gosu/releases/download" && \
     curl -L "$GOSU_DOWNLOAD_URL/$GOSU_VERSION/gosu-amd64" -o /bin/gosu && \
-    curl -L "$GOSU_DOWNLOAD_URL/$GOSU_VERSION/gosu-amd64.asc" -o /tmp/gosu.asc && \
-    gpg --keyserver "hkp://p80.pool.sks-keyservers.net:80" --recv-keys "B42F6819007F00F88E364FD4036A9C25BF357DD4" && \
-    gpg --verify /tmp/gosu.asc /bin/gosu && \
     chmod +x /bin/gosu && \
     gosu nobody true && \
     \
     # SEE: https://github.com/stefaniuk/dotfiles
-    curl -L https://raw.githubusercontent.com/stefaniuk/dotfiles/master/dotfiles -o - | /bin/bash -s -- \
-        --minimal \
-    && \
+    export USER_NAME=$SYSTEM_USER && \
+    export USER_EMAIL=${SYSTEM_USER}@local && \
+    curl -L https://raw.githubusercontent.com/stefaniuk/dotfiles/master/dotfiles -o - | /bin/bash -s && \
     # configure system user
     groupadd --system --gid $SYSTEM_USER_GID $SYSTEM_USER && \
     useradd --system --create-home --uid $SYSTEM_USER_UID --gid $SYSTEM_USER_GID $SYSTEM_USER && \

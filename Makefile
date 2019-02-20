@@ -65,8 +65,9 @@ bash:
 		/bin/bash --login ||:
 
 clean:
-	docker rmi $(IMAGE):$(shell cat VERSION) > /dev/null 2>&1 ||:
-	docker rmi $(IMAGE):latest > /dev/null 2>&1 ||:
+	docker rmi --force $(IMAGE):$(shell cat VERSION) > /dev/null 2>&1 ||:
+	docker rmi --force $(IMAGE):latest > /dev/null 2>&1 ||:
+	docker rmi --force $$(docker images | grep "<none>" | awk '{ print $$3 }') 2> /dev/null ||:
 
 push:
 	docker push $(IMAGE):$(shell cat VERSION)
